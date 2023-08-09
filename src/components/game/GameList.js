@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { getGames } from "../../managers/GameManager"
+import { deleteGame, getGames } from "../../managers/GameManager"
 import { useNavigate } from "react-router-dom"
 
 
@@ -7,8 +7,12 @@ export const GameList = (props) => {
     const [ games, setGames ] = useState([])
     const navigate = useNavigate()
 
-    useEffect(() => {
+    const fetchGames = () => {
         getGames().then(data => setGames(data))
+    }
+
+    useEffect(() => {
+        fetchGames()
     }, [])
 
     return (
@@ -33,6 +37,13 @@ export const GameList = (props) => {
                                     navigate(`/games/${game.id}/edit`)
                                 }}
                             >Edit</button>
+
+                            <button className="btn-postInteraction"
+                                onClick={(evt) => {
+                                    evt.preventDefault()
+                                    deleteGame(game.id).then(() => fetchGames())
+                                }}
+                            >Delete</button>
                         </footer>
                     </section>
                 })

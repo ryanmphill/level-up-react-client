@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { getEvents } from "../../managers/EventManager"
+import { deleteEvent, getEvents } from "../../managers/EventManager"
 import { useNavigate } from "react-router-dom"
 
 
@@ -7,8 +7,12 @@ export const EventList = (props) => {
     const [ events, setEvents ] = useState([])
     const navigate = useNavigate()
 
-    useEffect(() => {
+    const fetchEvents = () => {
         getEvents().then(data => setEvents(data))
+    }
+
+    useEffect(() => {
+        fetchEvents()
     }, [])
 
     return (
@@ -32,6 +36,13 @@ export const EventList = (props) => {
                                     navigate(`/events/${event.id}/edit`)
                                 }}
                             >Edit</button>
+
+                            <button className="btn-postInteraction"
+                                onClick={(evt) => {
+                                    evt.preventDefault()
+                                    deleteEvent(event.id).then(() => fetchEvents())
+                                }}
+                            >Delete</button>
                         </footer>
                     </section>
                 })
