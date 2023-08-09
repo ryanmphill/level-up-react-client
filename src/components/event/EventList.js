@@ -25,6 +25,14 @@ export const EventList = (props) => {
                         <div className="event__game">Game: {event?.game?.title}</div>
                         <div className="event__organizer">Organized by: {event?.organizer?.full_name}</div>
                         <div className="event__date">This event is scheduled for {event.date}</div>
+                        <footer>
+                            <button className="btn-postInteraction"
+                                onClick={(evt) => {
+                                    evt.preventDefault()
+                                    navigate(`/events/${event.id}/edit`)
+                                }}
+                            >Edit</button>
+                        </footer>
                     </section>
                 })
             }

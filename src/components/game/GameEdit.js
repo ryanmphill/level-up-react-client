@@ -26,7 +26,7 @@ export const GameEditForm = () => {
     })
 
     useEffect(() => {
-        // TODO: Get the game types, then set the state
+        // Set state for selected game
         getSingleGame(parseInt(gameId)).then((data) => {
             const copy = { ...currentGame }
             copy.skillLevel = data.skill_level
