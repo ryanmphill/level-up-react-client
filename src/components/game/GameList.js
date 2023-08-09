@@ -26,6 +26,14 @@ export const GameList = (props) => {
                         <div className="game__players">Players needed: {game.number_of_players}</div>
                         <div className="game__skillLevel">Skill level: {game.skill_level}</div>
                         <div className="game_creator">Uploaded by: {game?.creator?.full_name}</div>
+                        <footer>
+                            <button className="btn-postInteraction"
+                                onClick={(evt) => {
+                                    evt.preventDefault()
+                                    navigate(`/games/${game.id}/edit`)
+                                }}
+                            >Edit</button>
+                        </footer>
                     </section>
                 })
             }
